@@ -14,8 +14,11 @@ import { loadUser } from './actions/userAction';
 import UserOptions from "./component/layout/Header/UserOptions.js"
 import { useSelector } from 'react-redux';
 import Profile from "./component/User/Profile.js"
-import ProtectedRoute from './component/Route/ProtectedRoute';
-import UpdateProfile from "./component/User/UpdateProfile.js"
+// import ProtectedRoute from './component/Route/ProtectedRoute';
+import UpdateProfile from "./component/User/UpdateProfile.js";
+import UpdatePassword from "./component/User/UpdatePassword.js";
+import ForgotPassword from "./component/User/ForgotPassword.js";
+import ResetPassword from "./component/User/ResetPassword.js";
 
 
 
@@ -49,7 +52,9 @@ function App() {
       <Route exact path='/login' element={<LoginSignUp />} />
       <Route exact path='/account' element={isAuthenticated ? <Profile /> : <Navigate to="/login"/>} />
       <Route exact path='/me/update' element={isAuthenticated ? <UpdateProfile /> : <Navigate to="/login"/>} />
-
+      <Route exact path='/password/update' element={isAuthenticated ? <UpdatePassword /> : <Navigate to="/login"/>} />
+      <Route exact path='/password/forgot' element={<ForgotPassword />} />
+      <Route exact path='/password/reset/:token' element={<ResetPassword />} />
      
       
 

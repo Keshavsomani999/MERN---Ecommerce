@@ -34,8 +34,6 @@ const UpdateProfile = () => {
         myForm.set("email",email)
         myForm.set("avatar",avatar)
     
-        console.log(myForm);
-    
         dispatch(updateProfile(myForm));
         
     }
