@@ -6,17 +6,18 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToAppSharp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import {useNavigate} from 'react-router-dom'; 
 import { useAlert } from "react-alert";
 import { logout } from '../../../actions/userAction';
-import {useDispatch} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
 import { Navigate } from 'react-router-dom';
 
 
 
 const UserOptions = ({user}) => {
 
-
+const {cartItems} = useSelector((state)=>state.cart);
 const navigate = useNavigate(); 
 const [open, setOpen] = useState(false);
 const alert = useAlert()
@@ -25,6 +26,7 @@ const dispatch = useDispatch();
 const options = [
     {icon:<ListAltIcon />,name:"Orders",func:orders},
     {icon:<PersonIcon />,name:"Profile",func:account},
+    {icon:<ShoppingCartIcon />,name:`Cart(${cartItems.length})`,func:account},
     {icon:<ExitToAppIcon />,name:"Logout",func:logoutUser},
 ]
 

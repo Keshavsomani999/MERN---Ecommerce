@@ -50,8 +50,8 @@ function App() {
       <Route exact path='/products' element={<Products />} />
       <Route path='/products/:keyword' element={<Products />} />
       <Route exact path='/search' element={<Search />} />
-      <Route exact path='/login' element={<LoginSignUp />} />
       <Route exact path='/account' element={isAuthenticated ? <Profile /> : <Navigate to="/login"/>} />
+      <Route exact path='/login' element={<LoginSignUp />} />
       <Route exact path='/me/update' element={isAuthenticated ? <UpdateProfile /> : <Navigate to="/login"/>} />
       <Route exact path='/password/update' element={isAuthenticated ? <UpdatePassword /> : <Navigate to="/login"/>} />
       <Route exact path='/password/forgot' element={<ForgotPassword />} />

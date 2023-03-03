@@ -1,20 +1,50 @@
 import React, { Fragment } from 'react'
 import "./Cart.css";
 import CartItemCard from "./CartItemCard.js"
-
+import {useDispatch, useSelector} from "react-redux"
+import { addItemsToCart,removeItemsFromCart } from '../../actions/cartAction';
+import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+import { Typography } from '@material-ui/core';
+import { Link } from "react-router-dom"
 
 
 const Cart = () => {
 
-    const item = {
-        product:"ProductID",
-        price:2000,
-        name:"KEshav",
-        quantity:1,
-        image:"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+    const dispatch = useDispatch();
+    const {cartItems} = useSelector((state)=>state.cart);
+
+    const increaseQuantity = (id,quantity,stock) => {
+        const newQty = quantity + 1;
+        if (stock <= quantity){
+            return;
+        }
+        dispatch(addItemsToCart(id,newQty))
     }
 
-  return <Fragment>
+    const decreaseQuantity = (id,quantity) => {
+        const newQty = quantity - 1;
+        if (1 >= quantity){
+            return;
+        }
+        dispatch(addItemsToCart(id,newQty))
+    }
+    
+    const deleteCartItems = (id) =>{
+        dispatch(removeItemsFromCart(id))
+    }
+
+  return (
+    <Fragment>
+
+        {cartItems.length === 0 ? (
+            <div className='emptyCart'>
+                <RemoveShoppingCartIcon />
+
+                <Typography>No Product In Your Cart</Typography>
+                <Link to="/products">View Products</Link>
+
+            </div>
+        ) : <Fragment>
     <div className='cartPage'>
         <div className='carHeader'>
             <p>Product</p>
@@ -22,21 +52,23 @@ const Cart = () => {
             <p>Subtotal</p>
         </div>
 
-        <div className='cartContainer'>
-            <CartItemCard item={item} />
-            <div className='cartInput'>
-                <button>-</button>
-                <input type="number" value={item.quantity}  readOnly/>
-                <button>+</button>
-            </div>
+      {cartItems && cartItems.map((item)=>(
+          <div className='cartContainer' key={item.product}>
+          <CartItemCard item={item} deleteCartItems={deleteCartItems}/>
+          <div className='cartInput'>
+              <button onClick={()=>decreaseQuantity(item.product,item.quantity)}>-</button>
+              <input type="number" value={item.quantity}  readOnly/>
+              <button onClick={()=>increaseQuantity(item.product,item.quantity,item.stock)}>+</button>
+          </div>
 
-            <div className='cartSubtotal'>
-                {`₹${
-                    item.price * item.quantity
-                }`}
-            </div>
+          <div className='cartSubtotal'>
+              {`₹${
+                  item.price * item.quantity
+              }`}
+          </div>
 
-        </div>
+      </div>
+      ))}
         
         <div className='cartGrossProfit'>
             <div></div>
@@ -51,7 +83,9 @@ const Cart = () => {
         </div>
 
     </div>
-  </Fragment>
+  </Fragment>}
+    </Fragment>
+  )
 }
 
 export default Cart
