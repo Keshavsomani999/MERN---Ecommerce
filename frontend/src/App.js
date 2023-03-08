@@ -20,6 +20,8 @@ import UpdatePassword from "./component/User/UpdatePassword.js";
 import ForgotPassword from "./component/User/ForgotPassword.js";
 import ResetPassword from "./component/User/ResetPassword.js";
 import Cart from "./component/Cart/Cart.js"
+import Shipping from "./component/Cart/Shipping.js"
+import ConfirmOrder from "./component/Cart/ConfirmOrder.js"
 
 
 
@@ -51,12 +53,15 @@ function App() {
       <Route path='/products/:keyword' element={<Products />} />
       <Route exact path='/search' element={<Search />} />
       <Route exact path='/account' element={isAuthenticated ? <Profile /> : <Navigate to="/login"/>} />
-      <Route exact path='/login' element={<LoginSignUp />} />
       <Route exact path='/me/update' element={isAuthenticated ? <UpdateProfile /> : <Navigate to="/login"/>} />
       <Route exact path='/password/update' element={isAuthenticated ? <UpdatePassword /> : <Navigate to="/login"/>} />
       <Route exact path='/password/forgot' element={<ForgotPassword />} />
       <Route exact path='/password/reset/:token' element={<ResetPassword />} />
+      <Route exact path='/login' element={<LoginSignUp />} />
       <Route exact path='/cart' element={<Cart />} />
+      <Route exact path='/shipping' element={isAuthenticated ? <Shipping /> : <Navigate to="/login"/>} />
+      <Route exact path='/order/confirm' element={isAuthenticated ? <ConfirmOrder /> : <Navigate to="/login"/>} />
+
 
      
       

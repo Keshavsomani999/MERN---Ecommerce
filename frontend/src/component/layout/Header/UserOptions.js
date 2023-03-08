@@ -26,7 +26,7 @@ const dispatch = useDispatch();
 const options = [
     {icon:<ListAltIcon />,name:"Orders",func:orders},
     {icon:<PersonIcon />,name:"Profile",func:account},
-    {icon:<ShoppingCartIcon />,name:`Cart(${cartItems.length})`,func:account},
+    {icon:<ShoppingCartIcon style={{color:cartItems.length > 0 ? "tomato" :"unset"}} />,name:`Cart(${cartItems.length})`,func:cart},
     {icon:<ExitToAppIcon />,name:"Logout",func:logoutUser},
 ]
 
@@ -37,6 +37,9 @@ if(user.role === "admin"){
 function Dashboard(){
     navigate("/dashboard")
 }
+function cart(){
+    navigate("/cart")
+}
 function orders(){
     navigate("/orders")
 }
@@ -44,13 +47,12 @@ function account(){
     navigate("/account")
 }
 function logoutUser(){
-    console.log("svcmsdv");
     dispatch(logout());
     
     
-    // navigate("/login")
+    // navigate("/login")  // not uncomment
 
-    // alert.success("Logout Successully")
+    alert.success("Logout Successully")
 }
 
   return <Fragment>
@@ -69,7 +71,7 @@ function logoutUser(){
         alt="Profile"/>}
     >
         {options.map((item)=>(
-            <SpeedDialAction key={item.name} icon={item.icon} tooltipTitle={item.name} onClick={item.func} />
+            <SpeedDialAction key={item.name} icon={item.icon} tooltipTitle={item.name} onClick={item.func} tooltipOpen={window.innerWidth<=600?true:false}/>
         ))}
 
     </SpeedDial>
