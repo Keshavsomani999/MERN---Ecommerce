@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import MetaData from '../layout/MetaData';
 import "./ConfirmOrder.css";
 import { Link } from "react-router-dom"
+import {useNavigate} from 'react-router-dom'; 
 import { Typography } from '@material-ui/core';
 
 
@@ -11,6 +12,7 @@ const ConfirmOrder = () => {
 
     const { shippingInfo, cartItems} = useSelector((state) => state.cart);
     const { user } = useSelector((state)=>state.user);
+    const navigate = useNavigate(); 
 
     const subtotal = cartItems.reduce(
         (acc,item) => acc + item.quantity * item.price,
@@ -24,6 +26,21 @@ const ConfirmOrder = () => {
     const totalPrice = subtotal + tax + shippingCharges;
 
     const address = `${shippingInfo.address},${shippingInfo.city},${shippingInfo.state},${shippingInfo.pinCode},${shippingInfo.country}`;
+
+
+    const proceedToPayment = () =>{
+        const data = {
+            subtotal,
+            shippingCharges,
+            tax,
+            totalPrice,
+        };
+
+        sessionStorage.setItem("orderInfo",JSON.stringify(data));
+        navigate("/process/payment");
+
+    }
+
 
   return <Fragment>
     <MetaData title="Confirm Order" />
@@ -93,7 +110,7 @@ const ConfirmOrder = () => {
                     </p>
                     <span>₹{totalPrice}</span>
                 </div>
-                <button>Proceed To Payment</button>
+                <button onClick={proceedToPayment}>Proceed To Payment</button>
             </div>
         </div>
     </div>
