@@ -2,7 +2,7 @@ import React from 'react';
 import {useEffect,useState} from "react"
 import "./App.css";
 import Header from"./component/layout/Header/Header.js"
-import { BrowserRouter as Router,Route, Routes,Navigate,Switch } from 'react-router-dom';
+import { BrowserRouter as Router,Route, Routes,Navigate } from 'react-router-dom';
 import WebFont from "webfontloader";
 import Footer from"./component/layout/Footer/Footer.js"
 import Home from "./component/Home/Home.js"
@@ -30,8 +30,10 @@ import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from "./component/Cart/orderSuccess.js"
 import MyOrders from "./component/Order/MyOrders.js"
 import OrderDetails from "./component/Order/OrderDetails.js"
-
-
+import Dashboard from "./component/Admin/Dashboard.js"
+import ProductList from "./component/Admin/ProductList.js"
+import NewProduct from './component/Admin/NewProduct';
+import UpdateProduct from './component/Admin/UpdateProduct';
 
 
 
@@ -92,6 +94,13 @@ function App() {
       <Route exact path='/order/confirm' element={<ProtectedRoute component={ConfirmOrder}/>}/>
 
       <Route exact path='/order/:id' element={<ProtectedRoute component={OrderDetails}/> } />
+
+      <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true} component={Dashboard}/> } />
+      
+      <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} component={ProductList}/> } />
+
+      <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} component={NewProduct}/> } />
+      <Route exact path='/admin/product/:id' element={<ProtectedRoute isAdmin={true} component={UpdateProduct}/> } />
       
 
       </Routes>

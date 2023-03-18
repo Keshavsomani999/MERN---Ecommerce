@@ -11,7 +11,7 @@ import {useNavigate} from 'react-router-dom';
 import { useAlert } from "react-alert";
 import { logout } from '../../../actions/userAction';
 import {useDispatch,useSelector} from "react-redux"
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 
 
 
@@ -35,7 +35,7 @@ if(user.role === "admin"){
 }
 
 function Dashboard(){
-    navigate("/dashboard")
+    navigate("/admin/dashboard")
 }
 function cart(){
     navigate("/cart")

@@ -4,11 +4,13 @@ import {useNavigate} from 'react-router-dom';
 const navigate = useNavigate(); 
 navigate(`/products/${keyword}`);
 
-<<<<<<< HEAD
+
 
 //
 import { useParams } from 'react-router-dom';
 const { id } = useParams();
-=======
-day 
->>>>>>> 8b7f9bca9281db6da6ac9fedc87e4bb94632fe55
+
+
+// payment testing 
+
+card number := 4242424242424242
