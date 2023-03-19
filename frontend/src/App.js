@@ -34,6 +34,14 @@ import Dashboard from "./component/Admin/Dashboard.js"
 import ProductList from "./component/Admin/ProductList.js"
 import NewProduct from './component/Admin/NewProduct';
 import UpdateProduct from './component/Admin/UpdateProduct';
+import OrderList from './component/Admin/OrderList';
+import ProcessOrder from './component/Admin/ProcessOrder';
+import UsersList from './component/Admin/UsersList';
+import UpdateUser from './component/Admin/UpdateUser';
+import ProductReviews from './component/Admin/ProductReviews';
+import About from './component/layout/About/About';
+import Contact from './component/layout/Contact/Contact';
+import NotFound from './component/layout/Not Found/NotFound';
 
 
 
@@ -59,6 +67,8 @@ function App() {
     getStripeApiKey();
   },[])
 
+//  from this user connot inspect website
+  window.addEventListener("contextmenu",(e)=>e.preventDefault());
 
   return (
     <Router>
@@ -67,6 +77,8 @@ function App() {
       <Routes>
 
       <Route exact path='/' element={<Home />} />
+      <Route exact path='/about' element={<About />} />
+      <Route exact path='/contact' element={<Contact />} />
       <Route exact path='/product/:id' element={<ProductDetails />} />
       <Route exact path='/products' element={<Products />} />
       <Route path='/products/:keyword' element={<Products />} />
@@ -101,8 +113,14 @@ function App() {
 
       <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} component={NewProduct}/> } />
       <Route exact path='/admin/product/:id' element={<ProtectedRoute isAdmin={true} component={UpdateProduct}/> } />
+      <Route exact path='/admin/orders' element={<ProtectedRoute isAdmin={true} component={OrderList}/> } />
+      <Route exact path='/admin/order/:id' element={<ProtectedRoute isAdmin={true} component={ProcessOrder}/> } />
+      <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true} component={UsersList}/> } />
+      <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true} component={UpdateUser}/> } />
+      <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true} component={ProductReviews}/> } />
       
-
+      <Route path='*' element={<NotFound />} />
+      
       </Routes>
       <Footer />
     </Router>

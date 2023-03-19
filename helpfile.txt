@@ -14,3 +14,11 @@ const { id } = useParams();
 // payment testing 
 
 card number := 4242424242424242
+
+
+// backend
+
+npm run dev
+
+// frontend 
+npm run start
