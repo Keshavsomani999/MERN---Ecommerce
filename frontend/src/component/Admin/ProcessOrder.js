@@ -1,7 +1,6 @@
 import React, { Fragment,useEffect, useState } from 'react'
 import MetaData from '../layout/MetaData';
 import { Link } from "react-router-dom"
-import {useNavigate} from 'react-router-dom'; 
 import { Typography } from '@material-ui/core';
 import Sidebar from './Sidebar';
 import { getOrderDetails,clearErrors, updateOrder } from '../../actions/orderAction';
@@ -21,7 +20,6 @@ const ProcessOrder = () => {
     const { error:updateError, isUpdated } = useSelector((state)=> state.order)
 
 
-    const navigate = useNavigate(); 
     const dispatch = useDispatch()
     const alert = useAlert()
     const { id } = useParams();

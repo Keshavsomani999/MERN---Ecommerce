@@ -14,7 +14,7 @@ import { getAllUsers } from '../../actions/userAction.js'
 const Dashboard = () => {
 
   const {products } = useSelector((state)=>state.products);
-
+  window.Chart = Chart
   const { orders } = useSelector((state) => state.allOrders)
   const { users } = useSelector((state)=>state.allUsers);
 
